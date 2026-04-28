@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Авторизация{% endblock %}
+{% block content %}
+  <h1 class="h3 mb-3">Форма авторизации</h1>
+
+  <div class="row g-3">
+    <div class="col-12 col-lg-6">
+      <form method="post" class="card card-body bg-white">
+        <div class="mb-3">
+          <label class="form-label" for="username">Логин</label>
+          <input
+            class="form-control"
+            id="username"
+            name="username"
+            value="{{ form_data.get('username','') }}"
+            autocomplete="username"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="password">Пароль</label>
+          <input
+            class="form-control"
+            id="password"
+            name="password"
+            value="{{ form_data.get('password','') }}"
+            autocomplete="current-password"
+          />
+        </div>
+        <button class="btn btn-primary" type="submit">Войти</button>
+      </form>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <div class="card">
+        <div class="card-header">Параметры формы (request.form)</div>
+        <div class="card-body">
+          {% if submitted is not none %}
+            <div class="table-responsive">
+              <table class="table table-sm table-striped mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">Поле</th>
+                    <th scope="col">Значение</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for k, v in submitted.items() %}
+                    <tr>
+                      <td><code>{{ k }}</code></td>
+                      <td>{{ v }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+            <div class="text-muted">Пока ничего не отправлено.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

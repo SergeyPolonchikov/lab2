@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Проверка телефона{% endblock %}
+{% block content %}
+  <h1 class="h3 mb-3">Проверка номера телефона</h1>
+
+  <div class="row g-3">
+    <div class="col-12 col-lg-6">
+      <form method="post" class="card card-body bg-white" novalidate>
+        <div class="mb-3">
+          <label class="form-label" for="phone">Номер</label>
+          <input
+            class="form-control {% if not is_valid %}is-invalid{% endif %}"
+            id="phone"
+            name="phone"
+            value="{{ value }}"
+            placeholder="+7 (999) 111-22-33"
+          />
+          {% if not is_valid %}
+            <div class="invalid-feedback">{{ error }}</div>
+          {% endif %}
+        </div>
+        <button class="btn btn-primary" type="submit">Проверить</button>
+      </form>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <div class="card">
+        <div class="card-header">Результат</div>
+        <div class="card-body">
+          {% if request.method == "POST" %}
+            <div class="mb-2">
+              Введено: <code>{{ value }}</code>
+            </div>
+            {% if is_valid %}
+              <div class="alert alert-success mb-0">
+                Валидный номер. Только цифры: <code>{{ normalized }}</code>
+              </div>
+            {% else %}
+              <div class="alert alert-danger mb-0">Исправьте ошибку и попробуйте снова.</div>
+            {% endif %}
+          {% else %}
+            <div class="text-muted">Введите номер и нажмите «Проверить».</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

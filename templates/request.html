@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Данные запроса{% endblock %}
+{% block content %}
+  <h1 class="h3 mb-3">Данные запроса</h1>
+
+  <div class="row g-3">
+    <div class="col-12 col-lg-6">
+      <div class="card">
+        <div class="card-header">Параметры URL (request.args)</div>
+        <div class="card-body">
+          {% if url_args %}
+            <div class="table-responsive">
+              <table class="table table-sm table-striped mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">Параметр</th>
+                    <th scope="col">Значение</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for k, v in url_args.items() %}
+                    <tr>
+                      <td><code>{{ k }}</code></td>
+                      <td>{{ v }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+            <div class="text-muted">Нет параметров. Пример: <code>?a=1&amp;b=2</code></div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <div class="card">
+        <div class="card-header">Cookie (request.cookies)</div>
+        <div class="card-body">
+          {% if cookies %}
+            <div class="table-responsive">
+              <table class="table table-sm table-striped mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">Cookie</th>
+                    <th scope="col">Значение</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for k, v in cookies.items() %}
+                    <tr>
+                      <td><code>{{ k }}</code></td>
+                      <td>{{ v }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+            <div class="text-muted">Cookie нет.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">Заголовки (request.headers)</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-sm table-striped mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Заголовок</th>
+                  <th scope="col">Значение</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for k, v in headers.items() %}
+                  <tr>
+                    <td><code>{{ k }}</code></td>
+                    <td class="text-break">{{ v }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

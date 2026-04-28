@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+  <div class="p-4 bg-white border rounded-3">
+    <h1 class="h3 mb-3">Flask: отображение данных запроса</h1>
+    <p class="mb-3">
+      Ссылки для проверки:
+    </p>
+    <ul class="mb-0">
+      <li>
+        <a href="{{ url_for('request_info') }}?q=test&limit=10">/request с параметрами URL</a>
+        (также показывает заголовки и cookie)
+      </li>
+      <li><a href="{{ url_for('set_cookie') }}">установить cookie</a> и вернуться на /request</li>
+      <li><a href="{{ url_for('login') }}">форма авторизации</a> (POST → вывод введённых данных)</li>
+      <li><a href="{{ url_for('phone') }}">проверка телефона</a> (валидатор + Bootstrap ошибки)</li>
+    </ul>
+  </div>
+{% endblock %}
+
